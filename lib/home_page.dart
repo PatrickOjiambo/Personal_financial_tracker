@@ -9,31 +9,28 @@ class HomePage extends StatefulWidget {
 }
 
 class HomePageState extends State<HomePage> {
-  final MessageSender _sender = MessageSender();
-  final String _apiUrl = 'http://127.0.0.1:8000/sms';
+  final MessageRetriever _retriever = MessageRetriever();
 
   @override
   void initState() {
     super.initState();
-    _sender.queryMessages();
-
-
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Send SMS'),
+        title: const Text('SpendSense'),
       ),
       body: Center(
         child: ElevatedButton(
           onPressed: () async {
-            // await _sender.sendMessagesToApi(_apiUrl);
-            await sendSomeStuff();
-            // await getMessages();
+            await _retriever.queryMessages();
+            ScaffoldMessenger.of(context).showSnackBar(
+              const SnackBar(content: Text('Messages retrieved successfully')),
+            );
           },
-          child: const Text('Send SMS to API'),
+          child: const Text('Fetch SMS'),
         ),
       ),
     );
