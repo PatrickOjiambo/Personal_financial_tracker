@@ -1,5 +1,7 @@
-import 'package:flutter/material.dart';
 import 'fetch_sms.dart';
+import 'package:flutter/material.dart';
+import 'package:spend/screens/login_screen.dart';
+import 'list_sms.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -8,29 +10,50 @@ class HomePage extends StatefulWidget {
   HomePageState createState() => HomePageState();
 }
 
+
 class HomePageState extends State<HomePage> {
-  final MessageRetriever _retriever = MessageRetriever();
+  late final MessageRetriever _retriever;
 
   @override
   void initState() {
     super.initState();
+    _retriever = MessageRetriever();
+    _retriever.queryMessages(['MPESA', 'Fay']);
+    _retriever.analyzeMessages();
   }
 
   @override
   Widget build(BuildContext context) {
+    String message = "";
+    if (_retriever.getMessages().isNotEmpty) {
+      message = "Messages retrieved successfully!";
+    } else {
+      message = "Messages not retrieved";
+    }
+
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('SpendSense'),
-      ),
       body: Center(
-        child: ElevatedButton(
-          onPressed: () async {
-            await _retriever.queryMessages();
-            ScaffoldMessenger.of(context).showSnackBar(
-              const SnackBar(content: Text('Messages retrieved successfully')),
-            );
-          },
-          child: const Text('Fetch SMS'),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Text(message),
+            ElevatedButton(
+              child: const Text("Log out"),
+              onPressed: (){
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => const SignInScreen()));
+              },
+            ),
+            ElevatedButton(
+              child: const Text("View Messages"),
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) =>  const MessageListScreen(address: '',)));
+              },
+            ),
+          ],
         ),
       ),
     );
