@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "882062334365",
+    "project_id": "spendsense-2fd14",
+    "storage_bucket": "spendsense-2fd14.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:882062334365:android:fef849c38cea5f81187774",
+        "android_client_info": {
+          "package_name": "com.example.spend"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "882062334365-4tia09n35hjuce6o1nlmapp581ku17q2.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.spend",
+            "certificate_hash": "a502c8726a2e3e1c18b28bfed7deb158e654a66d"
+          }
+        },
+        {
+          "client_id": "882062334365-bare3h1n021eradt4v52nn0eqvcslgse.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAKamtlX3_2-DMu2Bj7WOWDS-7PqeS_EAY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "882062334365-bare3h1n021eradt4v52nn0eqvcslgse.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
