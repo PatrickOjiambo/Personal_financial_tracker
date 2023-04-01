@@ -1,7 +1,8 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'fetch_sms.dart';
 import 'package:flutter/material.dart';
 import 'package:spend/screens/login_screen.dart';
-import 'list_sms.dart';
+
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -40,19 +41,15 @@ class HomePageState extends State<HomePage> {
             ElevatedButton(
               child: const Text("Log out"),
               onPressed: (){
-                Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (context) => const SignInScreen()));
+                FirebaseAuth.instance.signOut().then((value){
+                  print("Signed out");
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => const SignInScreen()));
+                });
               },
             ),
-            ElevatedButton(
-              child: const Text("View Messages"),
-              onPressed: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) =>  const MessageListScreen(address: '',)));
-              },
-            ),
+
           ],
         ),
       ),
