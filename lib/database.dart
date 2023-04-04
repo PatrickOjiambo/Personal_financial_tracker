@@ -1,56 +1,68 @@
-import 'package:sqflite/sqflite.dart' as sql;
 
-class SQLDatabase{
-  static Future<void> createTables(sql.Database database) async{
-     print('*******************Creating tables**************');
-    await database.execute("""CREATE TABLE messages(
-        id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
-        address TEXT,
-        status TEXT,
-        amount TEXT,
-        recipient TEXT,
-        date TEXT,
-        createAt TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP
-        )
-    """);
-    print('**************Table created successfully**************');
+import 'package:hive/hive.dart';
+import 'package:path_provider/path_provider.dart';
 
 
+part 'database.g.dart';
 
-  }
-  static Future<sql.Database> db() async {
-    return sql.openDatabase(
-      'messages.db',
-      version: 1,
-      onCreate: (sql.Database database, int version) async{
-        print('**************Table created successfully**************');
-        await createTables(database);
-      },
-    );
+
+class Database {
+  static late Box<Message> _messageBox;
+
+  static Future<void> initialize() async {
+    final appDocumentDir = await getApplicationDocumentsDirectory();
+    Hive.init(appDocumentDir.path);
+    Hive.registerAdapter(MessageAdapter());
+
+
+_messageBox = await Hive.openBox<Message>('messages');
+    print('%%%%%%Message box opened: ${_messageBox.name}');
+    print("%%%%%pati%%%%Database directory: ${appDocumentDir.path}");
+
+    
   }
 
-  static Future<void> insertMessage({
-    required String address,
-    required String status,
-    required String amount,
-    required String recipient,
-    required String date,
-  }) async {
-    final db = await SQLDatabase.db();
+  static Future<void> openBox(String name) async {
+    _messageBox = await Hive.openBox<Message>(name);
 
-    await db.insert(
-      'messages',
-      {
-        'address': address,
-        'status': status,
-        'amount': amount,
-        'recipient': recipient,
-        'date': date,
-      },
-      conflictAlgorithm: sql.ConflictAlgorithm.replace,
-    );
-    print('******Message inserted successfully*******');
-
+    
   }
 
+  static Future<void> saveMessage(Message message) async {
+    await _messageBox.add(message);
+  }
+
+  static List<Message> getAllMessages() {
+    return _messageBox.values.toList();
+  }
+}
+
+@HiveType(typeId: 0)
+class Message extends HiveObject {
+  @HiveField(0)
+  int id;
+
+  @HiveField(1)
+  String address;
+
+  @HiveField(2)
+  String recipient;
+
+  @HiveField(3)
+  String amount;
+
+  @HiveField(4)
+  bool isCredit;
+
+  @HiveField(5)
+  String date;
+
+  Message({
+    
+    required this.address,
+    required this.recipient,
+    required this.amount,
+    required this.isCredit,
+    required this.date, required int id,
+  }): id = DateTime.now().millisecondsSinceEpoch;
 }

@@ -13,10 +13,8 @@ class SignInScreen extends StatefulWidget {
 }
 
 class _SignInScreenState extends State<SignInScreen> {
-  final TextEditingController _passwordTextController =
-      TextEditingController();
-  final TextEditingController _emailTextController =
-      TextEditingController();
+  final TextEditingController _passwordTextController = TextEditingController();
+  final TextEditingController _emailTextController = TextEditingController();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -27,10 +25,8 @@ class _SignInScreenState extends State<SignInScreen> {
           Colors.blue,
           Colors.red,
           Colors.orange,
-              Colors.orangeAccent
-
-
-            ], begin: Alignment.topCenter, end: Alignment.bottomCenter)),
+          Colors.orangeAccent
+        ], begin: Alignment.topCenter, end: Alignment.bottomCenter)),
         child: SingleChildScrollView(
           child: Padding(
             padding: EdgeInsets.fromLTRB(
@@ -41,21 +37,22 @@ class _SignInScreenState extends State<SignInScreen> {
                 const SizedBox(
                   height: 30,
                 ),
-                reusableTextField("Enter Username", Icons.person_outline,
+                reusableTextField("Enter email address", Icons.person_outline,
                     false, _emailTextController),
                 const SizedBox(
                   height: 20,
                 ),
-                reusableTextField("Enter password", Icons.lock_outline,
-                    true, _passwordTextController),
+                reusableTextField("Enter password", Icons.lock_outline, true,
+                    _passwordTextController),
                 const SizedBox(
                   height: 20,
                 ),
                 reusableButton(context, true, () {
-                  FirebaseAuth.instance.signInWithEmailAndPassword(
-                      email: _emailTextController.text,
-                      password: _passwordTextController.text)
-                  .then((value){
+                  FirebaseAuth.instance
+                      .signInWithEmailAndPassword(
+                          email: _emailTextController.text,
+                          password: _passwordTextController.text)
+                      .then((value) {
                     Navigator.push(context,
                         MaterialPageRoute(builder: (context) => HomePage()));
                   }).onError((error, stackTrace) {
@@ -79,16 +76,12 @@ class _SignInScreenState extends State<SignInScreen> {
             style: TextStyle(color: Colors.white70)),
         GestureDetector(
           onTap: () {
-            Navigator.push(
-                context,
-                MaterialPageRoute(
-                    builder: (context) => const SignUpScreen()));
+            Navigator.push(context,
+                MaterialPageRoute(builder: (context) => const SignUpScreen()));
           },
           child: const Text(
             "Sign up",
-            style: TextStyle(
-                color: Colors.white, fontWeight: FontWeight.bold
-            ),
+            style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
           ),
         ),
       ],

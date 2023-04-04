@@ -2,7 +2,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'fetch_sms.dart';
 import 'package:flutter/material.dart';
 import 'package:spend/screens/login_screen.dart';
-
+import 'list.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -10,7 +10,6 @@ class HomePage extends StatefulWidget {
   @override
   HomePageState createState() => HomePageState();
 }
-
 
 class HomePageState extends State<HomePage> {
   late final MessageRetriever _retriever;
@@ -40,16 +39,28 @@ class HomePageState extends State<HomePage> {
             Text(message),
             ElevatedButton(
               child: const Text("Log out"),
-              onPressed: (){
-                FirebaseAuth.instance.signOut().then((value){
-                  print("Signed out");
-                  Navigator.push(
-                      context,
-                      MaterialPageRoute(builder: (context) => const SignInScreen()));
-                });
+              onPressed: () {
+                FirebaseAuth.instance.signOut().then(
+                  (value) {
+                    print("Signed out");
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => const SignInScreen()));
+                  },
+                );
               },
             ),
-
+            //Calls the list for all the messages details saved into the database.
+            ElevatedButton(
+              child: const Text("List messages"),
+              onPressed: () {
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => const MessageListScreen()));
+              },
+            ),
           ],
         ),
       ),
