@@ -20,13 +20,12 @@ class _SignInScreenState extends State<SignInScreen> {
     return Scaffold(
       body: Container(
         decoration: const BoxDecoration(
-            gradient: LinearGradient(colors: [
-          Colors.green,
-          Colors.blue,
-          Colors.red,
-          Colors.orange,
-          Colors.orangeAccent
-        ], begin: Alignment.topCenter, end: Alignment.bottomCenter)),
+          gradient: LinearGradient(
+            colors: [Colors.pink, Colors.purple, Colors.lightBlue],
+            begin: Alignment.topCenter,
+            end: Alignment.bottomCenter,
+          ),
+        ),
         child: SingleChildScrollView(
           child: Padding(
             padding: EdgeInsets.fromLTRB(

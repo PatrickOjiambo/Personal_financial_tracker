@@ -12,15 +12,24 @@ class HomePage extends StatefulWidget {
 }
 
 class HomePageState extends State<HomePage> {
-  late final MessageRetriever _retriever;
+   MessageRetriever _retriever = MessageRetriever();
 
   @override
   void initState() {
     super.initState();
-    _retriever = MessageRetriever();
-    _retriever.queryMessages(['MPESA', 'Fay']);
-    _retriever.analyzeMessages();
+    _initAsync();
   }
+
+  Future<void> _initAsync() async {
+    _retriever.queryMessages(['MPESA', 'Fay']).then((_) {
+      return _retriever.analyzeMessages();
+    }).then((_) {
+      // Initialization is complete
+    }).catchError((error) {
+      // Handle initialization errors
+    });
+  }
+
 
   @override
   Widget build(BuildContext context) {
@@ -34,7 +43,7 @@ class HomePageState extends State<HomePage> {
     return Scaffold(
       body: Center(
         child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
+          mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: [
             Text(message),
             ElevatedButton(

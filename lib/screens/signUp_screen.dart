@@ -17,68 +17,66 @@ class _SignUpScreenState extends State<SignUpScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      extendBodyBehindAppBar: true,
-      appBar: AppBar(
-        backgroundColor: Colors.transparent,
-        elevation: 0,
-        title: const Text(
-          "Sign Up",
-          style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
-
-        ),
-      ),
-      body: Container(
-        width: MediaQuery.of(context).size.width,
-        height: MediaQuery.of(context).size.height,
-        decoration: const BoxDecoration(
-          gradient: LinearGradient(colors: [
-            Colors.green,
-            Colors.blue,
-            Colors.red,
-            Colors.orange,
-            Colors.orangeAccent
-
-          ], begin: Alignment.topCenter, end: Alignment.bottomCenter)),
-        child: SingleChildScrollView(
-        child: Padding(
-          padding: const EdgeInsets.fromLTRB(20, 120, 20, 0),
-          child: Column(
-            children: <Widget>[
-              const SizedBox(
-                height: 20,
-              ),
-              reusableTextField("Enter username", Icons.person_outline, false,
-                  _userNameTextController),
-              const SizedBox(
-                height: 20,
-              ),
-              reusableTextField("Enter email address", Icons.person_outline, false, _emailTextController),
-              const SizedBox(
-                height: 20,
-              ),
-          reusableTextField("Enter password", Icons.lock_outlined, true, _passwordTextController),
-          const SizedBox(
-            height: 20,
-          ),
-
-          reusableButton(context, false, (){
-            FirebaseAuth.instance
-                .createUserWithEmailAndPassword(
-                email: _emailTextController.text,
-                password: _passwordTextController.text)
-            .then((value){
-              print("Created New Account");
-              Navigator.push(context,
-                  MaterialPageRoute(builder: (context) => const HomePage()));
-            }).onError((error, stackTrace){
-              print("Error ${error.toString()}");
-            });
-          })
-            ],
+        extendBodyBehindAppBar: true,
+        appBar: AppBar(
+          backgroundColor: Colors.transparent,
+          elevation: 0,
+          title: const Text(
+            "Sign Up",
+            style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
           ),
         ),
-        )
-      )
-    );
+        body: Container(
+            width: MediaQuery.of(context).size.width,
+            height: MediaQuery.of(context).size.height,
+            decoration: const BoxDecoration(
+              gradient: LinearGradient(
+                colors: [Colors.pink, Colors.purple, Colors.lightBlue],
+                begin: Alignment.topCenter,
+                end: Alignment.bottomCenter,
+              ),
+            ),
+            child: SingleChildScrollView(
+              child: Padding(
+                padding: const EdgeInsets.fromLTRB(20, 120, 20, 0),
+                child: Column(
+                  children: <Widget>[
+                    const SizedBox(
+                      height: 20,
+                    ),
+                    reusableTextField("Enter username", Icons.person_outline,
+                        false, _userNameTextController),
+                    const SizedBox(
+                      height: 20,
+                    ),
+                    reusableTextField("Enter email address",
+                        Icons.person_outline, false, _emailTextController),
+                    const SizedBox(
+                      height: 20,
+                    ),
+                    reusableTextField("Enter password", Icons.lock_outlined,
+                        true, _passwordTextController),
+                    const SizedBox(
+                      height: 20,
+                    ),
+                    reusableButton(context, false, () {
+                      FirebaseAuth.instance
+                          .createUserWithEmailAndPassword(
+                              email: _emailTextController.text,
+                              password: _passwordTextController.text)
+                          .then((value) {
+                        print("Created New Account");
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => const HomePage()));
+                      }).onError((error, stackTrace) {
+                        print("Error ${error.toString()}");
+                      });
+                    })
+                  ],
+                ),
+              ),
+            )));
   }
 }
