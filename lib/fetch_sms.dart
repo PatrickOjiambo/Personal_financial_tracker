@@ -40,6 +40,14 @@ class MessageRetriever {
         // Determine whether it's a credit or debit message
         final isCredit = text.contains('received');
         final isDebit = text.contains('sent');
+        String status;
+        if (isCredit == true) {
+          status = "Credit";
+        } else if (isDebit == true) {
+          status = "Debit";
+        } else {
+          continue;
+        }
 
         // Extract amount, recipient, and date
         final amountRegex = RegExp(r'ksh([\d,]+(\.\d{1,2})?)');
@@ -47,9 +55,8 @@ class MessageRetriever {
         final amount = amountMatch?.group(1) ?? '0.00';
         print("***Amount: $amount");
 
-        final recipientRegex = isCredit
-            ? RegExp(r'from (.+?) on')
-            : RegExp(r'to (.+?) for');
+        final recipientRegex =
+            isCredit ? RegExp(r'from (.+?) on') : RegExp(r'to (.+?) for');
         final recipientMatch = recipientRegex.firstMatch(text);
         final recipient = recipientMatch?.group(1) ?? '';
         print("***recipient: $recipient");
@@ -62,7 +69,7 @@ class MessageRetriever {
         final timeMatch = dateRegex.firstMatch(text);
         final time = timeMatch?.group(2) ?? '';
         print("***time: $time");
-        print("***status: $isCredit");
+        print("***status: $status");
         print("***address: $address");
 
         final messageObject = Message(
