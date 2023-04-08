@@ -56,8 +56,8 @@ dev_dependencies:
 
 flutter_icons:
   android: true
-  ios: true
-  image_path: "images/spendsense.png"
+  ios: false
+  image_path: "images/SpendIcon.jpeg"
   min_sdk_android: 21 # android min sdk min:16, default 21
 
 
