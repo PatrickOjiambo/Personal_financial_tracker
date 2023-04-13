@@ -25,9 +25,49 @@ class MessageListScreen extends StatelessWidget {
               itemBuilder: (context, index) {
                 final message = messages[index];
                 return ListTile(
-                  title: Text(message.recipient),
-                  subtitle: Text(message.amount),
-                  trailing: Text(message.isCredit ? 'Credit' : 'Debit'),
+                  title: RichText(
+                    text: TextSpan(
+                      style: const TextStyle(
+                        fontSize: 16.0,
+                        color: Colors.black,
+                      ),
+                      children: [
+                        TextSpan(text: 'Recipient: '),
+                        TextSpan(
+                          text: message.recipient,
+                          style: const TextStyle(
+                            fontWeight: FontWeight.bold,
+                            color: Colors.blue,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                  subtitle: RichText(
+                    text: TextSpan(
+                      style: const TextStyle(
+                        fontSize: 14.0,
+                        color: Colors.black,
+                      ),
+                      children: [
+                        TextSpan(text: 'Amount: '),
+                        TextSpan(
+                          text: message.amount,
+                          style: const TextStyle(
+                            fontWeight: FontWeight.bold,
+                            color: Colors.green,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                  trailing: Text(
+                    message.isCredit ? 'Credit' : 'Debit',
+                    style: TextStyle(
+                      color: message.isCredit ? Colors.green : Colors.red,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
                 );
               },
             );

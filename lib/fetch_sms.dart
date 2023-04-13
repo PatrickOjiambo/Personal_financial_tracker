@@ -38,8 +38,9 @@ class MessageRetriever {
         final text = message.body!.toLowerCase();
 
         // Determine whether it's a credit or debit message
-        final isCredit = text.contains('received');
-        final isDebit = text.contains('sent');
+        final isCredit = text.contains('sent') || text.contains('paid');;
+        
+        final isDebit = text.contains('received');
         String status;
         if (isCredit == true) {
           status = "Credit";

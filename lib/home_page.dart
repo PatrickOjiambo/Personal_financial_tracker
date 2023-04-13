@@ -12,7 +12,7 @@ class HomePage extends StatefulWidget {
 }
 
 class HomePageState extends State<HomePage> {
-   MessageRetriever _retriever = MessageRetriever();
+  MessageRetriever _retriever = MessageRetriever();
 
   @override
   void initState() {
@@ -30,7 +30,6 @@ class HomePageState extends State<HomePage> {
     });
   }
 
-
   @override
   Widget build(BuildContext context) {
     String message = "";
@@ -41,25 +40,15 @@ class HomePageState extends State<HomePage> {
     }
 
     return Scaffold(
+      appBar: AppBar(
+        automaticallyImplyLeading: true, // This will add the back button
+        title: Text("Home"),
+      ),
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: [
             Text(message),
-            ElevatedButton(
-              child: const Text("Log out"),
-              onPressed: () {
-                FirebaseAuth.instance.signOut().then(
-                  (value) {
-                    print("Signed out");
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => const SignInScreen()));
-                  },
-                );
-              },
-            ),
             //Calls the list for all the messages details saved into the database.
             ElevatedButton(
               child: const Text("List messages"),
