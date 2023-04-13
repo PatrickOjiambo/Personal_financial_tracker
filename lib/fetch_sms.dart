@@ -69,7 +69,6 @@ class MessageRetriever {
 
         final timeMatch = dateRegex.firstMatch(text);
         final time = timeMatch?.group(2) ?? '';
-        print("***time: $time");
         print("***status: $status");
         print("***address: $address");
 
