@@ -8,7 +8,7 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
     await Database.initialize(); // Call initialize method first
-
+  final total = Database.fetch_amount();
   runApp(const MyApp());
 }
 

@@ -8,7 +8,7 @@ class MessageListScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('All Messages'),
+        title: const Text('Transactions'),
       ),
       body: FutureBuilder<List<Message>>(
         future: Future.value(Database.getAllMessages()),
@@ -62,9 +62,9 @@ class MessageListScreen extends StatelessWidget {
                     ),
                   ),
                   trailing: Text(
-                    message.isCredit ? 'Credit' : 'Debit',
+                    message.isCredit ? 'Sent' : 'Received',
                     style: TextStyle(
-                      color: message.isCredit ? Colors.green : Colors.red,
+                      color: message.isCredit ? Color.fromARGB(255, 235, 4, 24) : Color.fromARGB(255, 44, 196, 13),
                       fontWeight: FontWeight.bold,
                     ),
                   ),
