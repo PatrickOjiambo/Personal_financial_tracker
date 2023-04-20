@@ -22,6 +22,7 @@ class MessageListScreen extends StatelessWidget {
             final messages = snapshot.data!;
             return ListView.builder(
               itemCount: messages.length,
+              reverse: true,
               itemBuilder: (context, index) {
                 final message = messages[index];
                 return ListTile(

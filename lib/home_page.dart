@@ -1,9 +1,8 @@
 import 'package:spend/dashboard.dart';
-
+import 'banks.dart';
 import 'fetch_sms.dart';
 import 'package:flutter/material.dart';
 import 'my_drawer.dart';
-
 import 'list.dart';
 
 class HomePage extends StatefulWidget {
@@ -31,19 +30,19 @@ class HomePageState extends State<HomePage> {
       // Handle initialization errors
     });
   }
+
   var currentPage = DrawerSections.dashboard;
 
   @override
   Widget build(BuildContext context) {
-var container;
-if (currentPage == DrawerSections.dashboard ) {
-  container = DashboardPage();
-} else if (currentPage == DrawerSections.transactions) {
-  container = MessageListScreen();
-}
-
-// } else if (id == 3) {
-//   currentPage = DrawerSections.events;
+    var container;
+    if (currentPage == DrawerSections.dashboard) {
+      container = DashboardPage();
+    } else if (currentPage == DrawerSections.transactions) {
+      container = MessageListScreen();
+    } else if (currentPage == DrawerSections.banks) {
+      container = AutocompleteTextField();
+    }
 // } else if (id == 4) {
 //   currentPage = DrawerSections.setting;
 // } else if (id == 5) {
@@ -55,23 +54,24 @@ if (currentPage == DrawerSections.dashboard ) {
 // }
 
     return Scaffold(
-        appBar: AppBar(
-          backgroundColor: Colors.pink,
-          title: const Text("SpendSense"),
-        ),
-        body: container,
-        drawer: Drawer(
-          child: SingleChildScrollView(
-            child: Container(
-              child: Column(
-                children: [
-                  MyHeaderDrawer(),
-                  MyDrawerList(),
-                ],
-              ),
+      appBar: AppBar(
+        backgroundColor: Color.fromARGB(255, 15, 161, 22),
+        title: const Text("SpendSense"),
+      ),
+      body: container,
+      drawer: Drawer(
+        child: SingleChildScrollView(
+          child: Container(
+            child: Column(
+              children: [
+                MyHeaderDrawer(),
+                MyDrawerList(),
+              ],
             ),
           ),
-        ));
+        ),
+      ),
+    );
   }
 
   // ignore: non_constant_identifier_names
@@ -82,13 +82,15 @@ if (currentPage == DrawerSections.dashboard ) {
       ),
       child: Column(
         //Shows the list of menu drawer
-          children: [
-            menuItem(1, "Dashboard", Icons.dangerous_outlined,
-                currentPage == DrawerSections.dashboard ? true : false),
-            menuItem(2, "Transactions", Icons.monetization_on_outlined,
-                currentPage == DrawerSections.transactions ? true : false),
-
-          ]),
+        children: [
+          menuItem(1, "Dashboard", Icons.dangerous_outlined,
+              currentPage == DrawerSections.dashboard ? true : false),
+          menuItem(2, "Transactions", Icons.monetization_on_outlined,
+              currentPage == DrawerSections.transactions ? true : false),
+          menuItem(3, "Your Banks", Icons.account_balance,
+              currentPage == DrawerSections.banks ? true : false),
+        ],
+      ),
     );
   }
 
@@ -98,45 +100,44 @@ if (currentPage == DrawerSections.dashboard ) {
       child: InkWell(
         onTap: () {
           Navigator.pop(context);
-          setState(() {
-            if (id == 1) {
-              currentPage = DrawerSections.dashboard;
-            } else if (id == 2) {
-              currentPage = DrawerSections.transactions;
-            }
-          });
+          setState(
+            () {
+              if (id == 1) {
+                currentPage = DrawerSections.dashboard;
+              } else if (id == 2) {
+                currentPage = DrawerSections.transactions;
+              } else if (id == 3) {
+                currentPage == DrawerSections.banks;
+              }
+            },
+          );
         },
         child: Padding(
-            padding: const EdgeInsets.all(15.0),
-            child: Row(
-              children: [
-                Expanded(
-                  child: Icon(
-                    icon,
-                    size: 20,
+          padding: const EdgeInsets.all(15.0),
+          child: Row(
+            children: [
+              Expanded(
+                child: Icon(
+                  icon,
+                  size: 20,
+                  color: Colors.black,
+                ),
+              ),
+              Expanded(
+                child: Text(
+                  title,
+                  style: const TextStyle(
                     color: Colors.black,
+                    fontSize: 16,
                   ),
                 ),
-                Expanded(
-                  child: Text(
-                    title,
-                    style: const TextStyle(
-                      color: Colors.black,
-                      fontSize: 16,
-                    ),
-                  ),
-                ),
-              ],
-            )),
+              ),
+            ],
+          ),
+        ),
       ),
     );
   }
 }
 
-enum DrawerSections {
-  dashboard,
-  transactions
-
-}
-
-
+enum DrawerSections { dashboard, transactions, banks }

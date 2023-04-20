@@ -22,7 +22,7 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: 'SpendSense',
       theme: ThemeData(
-        primarySwatch: Colors.pink,
+        primarySwatch: Colors.green,
         splashColor: Colors.white70,
       ),
       home: const SignInScreen(),
