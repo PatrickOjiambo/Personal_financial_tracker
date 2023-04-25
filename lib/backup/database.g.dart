@@ -19,7 +19,7 @@ class MessageAdapter extends TypeAdapter<Message> {
     return Message(
       address: fields[1] as String,
       recipient: fields[2] as String,
-      amount: fields[3] as String,
+      amount: fields[3] as double,
       isCredit: fields[4] as bool,
       date: fields[5] as String,
       id: fields[0] as int,

@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import 'back_restore.dart';
+
 class BackupPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
@@ -26,7 +28,7 @@ class BackupPage extends StatelessWidget {
             SizedBox(height: 16),
             ElevatedButton(
               onPressed: () {
-                // Implement backup logic here
+                backupDatabase();
               },
               child: Text(
                 'Backup Now',

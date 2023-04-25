@@ -58,7 +58,7 @@ class Message extends HiveObject {
   String recipient;
 
   @HiveField(3)
-  String amount;
+  double amount;
 
   @HiveField(4)
   bool isCredit;

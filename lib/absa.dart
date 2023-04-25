@@ -1,18 +1,18 @@
 import 'package:flutter/material.dart';
 import 'backup/database.dart';
 
-class MessageListScreen extends StatelessWidget {
-  const MessageListScreen({Key? key}) : super(key: key);
+class AbsaListScreen extends StatelessWidget {
+  const AbsaListScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Transactions'),
-        leading: null,
+        title: const Text('Absa Bank'),
+        automaticallyImplyLeading: false,
       ),
       body: FutureBuilder<List<Message>>(
-        future: Future.value(Database.getAllMessages()),
+        future: Future.value(Database.getAbsa()),
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
             return const Center(
@@ -54,7 +54,7 @@ class MessageListScreen extends StatelessWidget {
                       children: [
                         TextSpan(text: 'Amount: '),
                         TextSpan(
-                          text: message.amount.toString(),
+                          text: message.amount.toString(),//Changed line
                           style: const TextStyle(
                             fontWeight: FontWeight.bold,
                             color: Colors.green,

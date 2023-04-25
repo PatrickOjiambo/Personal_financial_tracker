@@ -1,18 +1,18 @@
 import 'package:flutter/material.dart';
 import 'backup/database.dart';
 
-class MessageListScreen extends StatelessWidget {
-  const MessageListScreen({Key? key}) : super(key: key);
+class EquityListScreen extends StatelessWidget {
+  const EquityListScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Transactions'),
-        leading: null,
+        title: const Text('Equity Bank'),
+        automaticallyImplyLeading: false,
       ),
       body: FutureBuilder<List<Message>>(
-        future: Future.value(Database.getAllMessages()),
+        future: Future.value(Database.getEquity()),
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
             return const Center(

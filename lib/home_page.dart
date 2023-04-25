@@ -1,9 +1,13 @@
+import 'package:spend/backup/backup_data.dart';
 import 'package:spend/dashboard.dart';
-import 'banks.dart';
+import 'package:spend/list.dart';
+import 'mpesa.dart';
+import 'absa.dart';
+import 'stanchart.dart';
+import 'equity.dart';
 import 'fetch_sms.dart';
 import 'package:flutter/material.dart';
 import 'my_drawer.dart';
-import 'list.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -22,7 +26,7 @@ class HomePageState extends State<HomePage> {
   }
 
   Future<void> _initAsync() async {
-    _retriever.queryMessages(['MPESA', 'Omosh']).then((_) {
+    _retriever.queryMessages(['MPESA', 'Absa bank', 'Equity bank', 'StanChart']).then((_) {
       return _retriever.analyzeMessages();
     }).then((_) {
       // Initialization is complete
@@ -32,7 +36,6 @@ class HomePageState extends State<HomePage> {
   }
 
   var currentPage = DrawerSections.dashboard;
-
   @override
   Widget build(BuildContext context) {
     var container;
@@ -40,9 +43,18 @@ class HomePageState extends State<HomePage> {
       container = DashboardPage();
     } else if (currentPage == DrawerSections.transactions) {
       container = MessageListScreen();
-    } else if (currentPage == DrawerSections.banks) {
-      container = AutocompleteTextField();
+    } else if (currentPage == DrawerSections.absabank) {
+      container = AbsaListScreen();
+    } else if (currentPage == DrawerSections.equity_bank) {
+      container = EquityListScreen();
+    } else if (currentPage == DrawerSections.mpesa) {
+      container = MpesaListScreen();
+    } else if (currentPage == DrawerSections.stanchart) {
+      container = StanchartListScreen();
+    } else if (currentPage == DrawerSections.backup_data) {
+      container = BackupPage();
     }
+
 // } else if (id == 4) {
 //   currentPage = DrawerSections.setting;
 // } else if (id == 5) {
@@ -87,8 +99,16 @@ class HomePageState extends State<HomePage> {
               currentPage == DrawerSections.dashboard ? true : false),
           menuItem(2, "Transactions", Icons.monetization_on_outlined,
               currentPage == DrawerSections.transactions ? true : false),
-          menuItem(3, "Your Banks", Icons.account_balance,
-              currentPage == DrawerSections.banks ? true : false),
+          menuItem(6, "Mpesa", Icons.account_balance,
+              currentPage == DrawerSections.mpesa ? true : false),
+          menuItem(3, "Absa Bank", Icons.account_balance,
+              currentPage == DrawerSections.absabank ? true : false),
+          menuItem(4, "Equity Bank", Icons.account_balance,
+              currentPage == DrawerSections.equity_bank ? true : false),
+          menuItem(5, "Stanchart bank", Icons.account_balance,
+              currentPage == DrawerSections.stanchart ? true : false),
+          menuItem(7, "Backup data", Icons.backup,
+              currentPage == DrawerSections.backup_data ? true : false),
         ],
       ),
     );
@@ -107,7 +127,15 @@ class HomePageState extends State<HomePage> {
               } else if (id == 2) {
                 currentPage = DrawerSections.transactions;
               } else if (id == 3) {
-                currentPage == DrawerSections.banks;
+                currentPage = DrawerSections.absabank;
+              } else if (id == 4) {
+                currentPage = DrawerSections.equity_bank;
+              } else if (id == 5) {
+                currentPage = DrawerSections.stanchart;
+              } else if (id == 6) {
+                currentPage = DrawerSections.mpesa;
+              } else {
+                currentPage = DrawerSections.backup_data;
               }
             },
           );
@@ -140,4 +168,12 @@ class HomePageState extends State<HomePage> {
   }
 }
 
-enum DrawerSections { dashboard, transactions, banks }
+enum DrawerSections {
+  dashboard,
+  transactions,
+  mpesa,
+  stanchart,
+  equity_bank,
+  absabank,
+  backup_data
+}

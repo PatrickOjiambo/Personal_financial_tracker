@@ -2,13 +2,12 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:spend/screens/login_screen.dart';
 
-import 'database.dart';
+import 'backup/database.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
     await Database.initialize(); // Call initialize method first
-  final total = Database.fetch_amount();
   runApp(const MyApp());
 }
 

@@ -1,18 +1,14 @@
 import 'package:flutter/material.dart';
 import 'backup/database.dart';
 
-class MessageListScreen extends StatelessWidget {
-  const MessageListScreen({Key? key}) : super(key: key);
+class MpesaListScreen extends StatelessWidget {
+  const MpesaListScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text('Transactions'),
-        leading: null,
-      ),
+    return Scaffold(      
       body: FutureBuilder<List<Message>>(
-        future: Future.value(Database.getAllMessages()),
+        future: Future.value(Database.getMpesa()),
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
             return const Center(

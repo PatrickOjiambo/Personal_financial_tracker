@@ -1,6 +1,6 @@
 import 'package:flutter_sms_inbox/flutter_sms_inbox.dart';
 import 'package:permission_handler/permission_handler.dart';
-import 'database.dart';
+import 'backup/database.dart';
 
 class MessageRetriever {
   final SmsQuery _query = SmsQuery();
@@ -54,7 +54,8 @@ class MessageRetriever {
         // Extract amount, recipient, and date
         final amountRegex = RegExp(r'ksh([\d,]+(\.\d{1,2})?)');
         final amountMatch = amountRegex.firstMatch(text);
-        final amount = amountMatch?.group(1)?.trim() ?? '0.00';
+        final amountString = amountMatch?.group(1)?.trim() ?? '0.00';
+        final amount = double.parse(amountString);
         print("***Amount: $amount");
 
         //Recipient
