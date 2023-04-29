@@ -8,6 +8,8 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
     await Database.initialize(); // Call initialize method first
+  final alarm = Database.getTotalAmount();
+  print("########Alarm: $alarm");
   runApp(const MyApp());
 }
 
@@ -21,7 +23,7 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: 'SpendSense',
       theme: ThemeData(
-        primarySwatch: Colors.green,
+        primarySwatch: Colors.indigo,
         splashColor: Colors.white70,
       ),
       home: const SignInScreen(),

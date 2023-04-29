@@ -44,6 +44,13 @@ class Database {
   return _messageBox.values
   .where((Message) => Message.address == "Absa Bank").toList();
   }
+  static double getTotalAmount() {
+  return _messageBox.values
+      .where((Message) =>Message.isCredit == true)
+      .map((message) => message.amount)
+      .fold(0, (prev, curr) => prev + curr);
+}
+
 }
 
 @HiveType(typeId: 0)

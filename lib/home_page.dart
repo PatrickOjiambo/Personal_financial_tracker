@@ -1,4 +1,5 @@
 import 'package:spend/backup/backup_data.dart';
+import 'package:spend/budget_beep/budget_beep.dart';
 import 'package:spend/dashboard.dart';
 import 'package:spend/list.dart';
 import 'mpesa.dart';
@@ -26,7 +27,8 @@ class HomePageState extends State<HomePage> {
   }
 
   Future<void> _initAsync() async {
-    _retriever.queryMessages(['MPESA', 'Absa bank', 'Equity bank', 'StanChart']).then((_) {
+    _retriever.queryMessages(
+        ['MPESA', 'Absa bank', 'Equity bank', 'StanChart']).then((_) {
       return _retriever.analyzeMessages();
     }).then((_) {
       // Initialization is complete
@@ -53,6 +55,8 @@ class HomePageState extends State<HomePage> {
       container = StanchartListScreen();
     } else if (currentPage == DrawerSections.backup_data) {
       container = BackupPage();
+    } else if (currentPage == DrawerSections.budget_beep) {
+      container = BudgetBeep();
     }
 
 // } else if (id == 4) {
@@ -67,7 +71,7 @@ class HomePageState extends State<HomePage> {
 
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Color.fromARGB(255, 15, 161, 22),
+        backgroundColor: Colors.indigo,
         title: const Text("SpendSense"),
       ),
       body: container,
@@ -109,6 +113,8 @@ class HomePageState extends State<HomePage> {
               currentPage == DrawerSections.stanchart ? true : false),
           menuItem(7, "Backup data", Icons.backup,
               currentPage == DrawerSections.backup_data ? true : false),
+          menuItem(8, "Budget Beep", Icons.alarm,
+              currentPage == DrawerSections.budget_beep ? true : false),
         ],
       ),
     );
@@ -134,6 +140,8 @@ class HomePageState extends State<HomePage> {
                 currentPage = DrawerSections.stanchart;
               } else if (id == 6) {
                 currentPage = DrawerSections.mpesa;
+              } else if (id == 8) {
+                currentPage = DrawerSections.budget_beep;
               } else {
                 currentPage = DrawerSections.backup_data;
               }
@@ -175,5 +183,6 @@ enum DrawerSections {
   stanchart,
   equity_bank,
   absabank,
-  backup_data
+  backup_data,
+  budget_beep
 }

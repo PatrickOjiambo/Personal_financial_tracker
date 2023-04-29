@@ -17,7 +17,7 @@ class BackupPage extends StatelessWidget {
             Icon(
               Icons.backup,
               size: 100,
-              color: Color.fromARGB(255, 42, 172, 17),
+              color: Colors.indigo
             ),
             SizedBox(height: 16),
             Text(
@@ -37,7 +37,7 @@ class BackupPage extends StatelessWidget {
               style: ElevatedButton.styleFrom(
                 padding: EdgeInsets.symmetric(horizontal: 48, vertical: 16),
                 textStyle: TextStyle(color: Colors.white),
-                backgroundColor: Color.fromARGB(255, 35, 165, 23),
+                backgroundColor: Colors.indigo,
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(8),
                 ),
