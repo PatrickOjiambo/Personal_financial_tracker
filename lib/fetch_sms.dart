@@ -74,6 +74,7 @@ class MessageRetriever {
         final time = timeMatch?.group(2) ?? '';
         print("***status: $status");
         print("***address: $address");
+        print("****time: $time");
 
         final messageObject = Message(
           id: DateTime.now().millisecondsSinceEpoch,

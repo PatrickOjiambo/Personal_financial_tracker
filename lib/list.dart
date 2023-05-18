@@ -77,7 +77,7 @@ class MessageListScreen extends StatelessWidget {
             );
           }
           return const Center(
-            child: Text('No messages found'),
+            child: Text('No transactions found'),
           );
         },
       ),

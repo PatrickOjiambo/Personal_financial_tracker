@@ -54,3 +54,37 @@ class MessageAdapter extends TypeAdapter<Message> {
           runtimeType == other.runtimeType &&
           typeId == other.typeId;
 }
+
+class TargetAdapter extends TypeAdapter<Target> {
+  @override
+  final int typeId = 1;
+
+  @override
+  Target read(BinaryReader reader) {
+    final numOfFields = reader.readByte();
+    final fields = <int, dynamic>{
+      for (int i = 0; i < numOfFields; i++) reader.readByte(): reader.read(),
+    };
+    return Target(
+      target: fields[0] as double,
+    );
+  }
+
+  @override
+  void write(BinaryWriter writer, Target obj) {
+    writer
+      ..writeByte(1)
+      ..writeByte(0)
+      ..write(obj.target);
+  }
+
+  @override
+  int get hashCode => typeId.hashCode;
+
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      other is TargetAdapter &&
+          runtimeType == other.runtimeType &&
+          typeId == other.typeId;
+}

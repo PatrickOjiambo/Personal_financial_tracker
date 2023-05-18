@@ -10,6 +10,7 @@ class AbsaListScreen extends StatelessWidget {
       appBar: AppBar(
         title: const Text('Absa Bank'),
         automaticallyImplyLeading: false,
+        
       ),
       body: FutureBuilder<List<Message>>(
         future: Future.value(Database.getAbsa()),

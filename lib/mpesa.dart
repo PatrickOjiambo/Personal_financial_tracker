@@ -6,7 +6,11 @@ class MpesaListScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(      
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text('Mpesa'),
+        automaticallyImplyLeading: false,
+      ),    
       body: FutureBuilder<List<Message>>(
         future: Future.value(Database.getMpesa()),
         builder: (context, snapshot) {
