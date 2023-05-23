@@ -1,6 +1,7 @@
 import 'package:flutter_sms_inbox/flutter_sms_inbox.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'backup/database.dart';
+import 'package:intl/intl.dart';
 
 class MessageRetriever {
   final SmsQuery _query = SmsQuery();
@@ -41,7 +42,7 @@ class MessageRetriever {
         final isCredit = text.contains('sent') || text.contains('paid');
         ;
 
-        final isDebit = text.contains('received');
+        final isDebit = text.contains('received') || text.contains('credited');
         String status;
         if (isCredit == true) {
           status = "Credit";
@@ -68,22 +69,26 @@ class MessageRetriever {
         final dateRegex = RegExp(r'on ([\d/]+) at ([\d:]+)');
         final dateMatch = dateRegex.firstMatch(text);
         final date = dateMatch?.group(1) ?? '';
+
         print("***date: $date");
 
-        final timeMatch = dateRegex.firstMatch(text);
-        final time = timeMatch?.group(2) ?? '';
+        final timeRegex =
+            RegExp(r'(\d{1,2}:\d{2}\s*[AP]M)', caseSensitive: false);
+        final timeMatch = timeRegex.firstMatch(text);
+        final time2 = timeMatch?.group(1) ?? '';
+        final time = time2.toUpperCase();
         print("***status: $status");
         print("***address: $address");
         print("****time: $time");
 
         final messageObject = Message(
-          id: DateTime.now().millisecondsSinceEpoch,
-          address: address,
-          recipient: recipient,
-          amount: amount,
-          isCredit: isCredit,
-          date: date,
-        );
+            id: DateTime.now().millisecondsSinceEpoch,
+            address: address,
+            recipient: recipient,
+            amount: amount,
+            isCredit: isCredit,
+            date: date,
+            time: time);
         await Database.saveMessage(messageObject);
       }
     }

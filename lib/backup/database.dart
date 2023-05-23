@@ -126,6 +126,9 @@ class Message extends HiveObject {
   @HiveField(5)
   String date;
 
+  @HiveField(6)
+  String time;
+
   Message({
     required this.address,
     required this.recipient,
@@ -133,6 +136,7 @@ class Message extends HiveObject {
     required this.isCredit,
     required this.date,
     required int id,
+    required this.time
   }) : id = DateTime.now().millisecondsSinceEpoch;
 }
 

@@ -23,13 +23,14 @@ class MessageAdapter extends TypeAdapter<Message> {
       isCredit: fields[4] as bool,
       date: fields[5] as String,
       id: fields[0] as int,
+      time: fields[6] as String,
     );
   }
 
   @override
   void write(BinaryWriter writer, Message obj) {
     writer
-      ..writeByte(6)
+      ..writeByte(7)
       ..writeByte(0)
       ..write(obj.id)
       ..writeByte(1)
@@ -41,7 +42,9 @@ class MessageAdapter extends TypeAdapter<Message> {
       ..writeByte(4)
       ..write(obj.isCredit)
       ..writeByte(5)
-      ..write(obj.date);
+      ..write(obj.date)
+      ..writeByte(6)
+      ..write(obj.time);
   }
 
   @override

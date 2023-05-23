@@ -1,3 +1,5 @@
+// ignore_for_file: unused_field
+
 import 'package:flutter/material.dart';
 import 'backup/database.dart';
 
@@ -10,6 +12,7 @@ class DashboardPage extends StatefulWidget {
 }
 
 class _DashboardPageState extends State<DashboardPage> {
+  final target = Database.getTargetAmount();
   final spend = Database.getTotalCreditAmount();
   final inco = Database.getTotalDebitAmount();
   final total = Database.getTotalAmount();
@@ -17,12 +20,15 @@ class _DashboardPageState extends State<DashboardPage> {
   final mpesa = Database.getMpesaAmount();
   final equity = Database.getEquityAmount();
   final stanchart = Database.getStanchartAmount();
+  late double progress2 = total / target;
+  double progress = 0.5;
+
   @override
   Widget build(BuildContext context) {
     final screenHeight = MediaQuery.of(context).size.height;
     final quarterHeight = screenHeight / 3;
     final eighthHeight = screenHeight / 4;
-    final thirdScreen = screenHeight / 6;
+    final thirdScreen = screenHeight / 8;
 //This is the top row
     var top = Row(
       mainAxisSize: MainAxisSize.min,
@@ -58,37 +64,45 @@ class _DashboardPageState extends State<DashboardPage> {
             ),
           ),
           SizedBox(height: 16.0),
-          Text('Mpesa: Ksh.${mpesa}',
-              style: TextStyle(
-                color: Colors.white,
-                fontSize: 18,
-                fontFamily: 'Roboto',
-                fontWeight: FontWeight.bold,
-              )),
+          Text(
+            'Mpesa: Ksh.${mpesa}',
+            style: TextStyle(
+              color: Colors.white,
+              fontSize: 18,
+              fontFamily: 'Roboto',
+              fontWeight: FontWeight.bold,
+            ),
+          ),
           SizedBox(height: 16.0),
-          Text('Absa: Ksh.${absa}',
-              style: TextStyle(
-                color: Colors.white,
-                fontSize: 18,
-                fontFamily: 'Roboto',
-                fontWeight: FontWeight.bold,
-              )),
+          Text(
+            'Absa: Ksh.${absa}',
+            style: TextStyle(
+              color: Colors.white,
+              fontSize: 18,
+              fontFamily: 'Roboto',
+              fontWeight: FontWeight.bold,
+            ),
+          ),
           SizedBox(height: 16.0),
-          Text('Stanchart: Ksh.${stanchart}',
-              style: TextStyle(
-                color: Colors.white,
-                fontSize: 18,
-                fontFamily: 'Roboto',
-                fontWeight: FontWeight.bold,
-              )),
+          Text(
+            'Stanchart: Ksh.${stanchart}',
+            style: TextStyle(
+              color: Colors.white,
+              fontSize: 18,
+              fontFamily: 'Roboto',
+              fontWeight: FontWeight.bold,
+            ),
+          ),
           SizedBox(height: 16.0),
-          Text('Equity: Ksh.${equity}',
-              style: TextStyle(
-                color: Colors.white,
-                fontSize: 18,
-                fontFamily: 'Roboto',
-                fontWeight: FontWeight.bold,
-              )),
+          Text(
+            'Equity: Ksh.${equity}',
+            style: TextStyle(
+              color: Colors.white,
+              fontSize: 18,
+              fontFamily: 'Roboto',
+              fontWeight: FontWeight.bold,
+            ),
+          ),
         ],
       ),
     );
@@ -107,13 +121,27 @@ class _DashboardPageState extends State<DashboardPage> {
       child: Container(child: overdata),
     );
 
-//     var slider = LinearProgressIndicator(
-
-//   value: totalAmount/targetAmount,
-//   backgroundColor: Colors.grey[200],
-//   valueColor: AlwaysStoppedAnimation<Color>(Colors.blue),
-
-// );
+//This is the code for the slider
+    // var slider = Container(
+    //   height: thirdScreen,
+    //   decoration: BoxDecoration(
+    //     borderRadius: BorderRadius.all(Radius.circular(12.0)),
+    //     gradient: LinearGradient(
+    //       begin: Alignment.topLeft,
+    //       end: Alignment.bottomRight,
+    //       colors: [Colors.indigo, Colors.blue],
+    //     ),
+    //   ),
+      
+    // );
+    // var inslider = ClipRRect(
+    //     borderRadius: BorderRadius.all(Radius.circular(12.0)),
+    //     child: LinearProgressIndicator(
+    //       value: progress,
+    //       backgroundColor: Colors.grey[300],
+    //       valueColor: AlwaysStoppedAnimation<Color>(Colors.transparent),
+    //     ),
+    //   );
 
 //This is data below the two widgets below
     var break1 = Row(
@@ -216,6 +244,8 @@ class _DashboardPageState extends State<DashboardPage> {
             SizedBox(height: 16.0),
             overall,
             SizedBox(height: 16.0),
+            // slider,
+            // SizedBox(height: 16.0),
             breakdown,
           ],
         ),

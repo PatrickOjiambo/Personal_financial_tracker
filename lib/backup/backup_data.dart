@@ -5,6 +5,32 @@ import 'back_restore.dart';
 class BackupPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+
+  showAlertDialog(BuildContext context) {
+
+  // set up the button
+  Widget okButton = TextButton(
+    child: Text("OK"),
+    onPressed: () { },
+  );
+
+  // set up the AlertDialog
+  AlertDialog alert = AlertDialog(
+    title: Text("Backup successfully done"),
+    content: Text("A backup of your transaction messages has successfully been created."),
+    actions: [
+      okButton,
+    ],
+  );
+
+  // show the dialog
+  showDialog(
+    context: context,
+    builder: (BuildContext context) {
+      return alert;
+    },
+  );
+}
     return Scaffold(
       appBar: AppBar(
         title: Text('Backup Data'),
@@ -29,6 +55,7 @@ class BackupPage extends StatelessWidget {
             ElevatedButton(
               onPressed: () {
                 backupDatabase();
+                showAlertDialog(context);
               },
               child: Text(
                 'Backup Now',

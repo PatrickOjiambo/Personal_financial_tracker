@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'backup/database.dart';
 
+
 class MessageListScreen extends StatelessWidget {
   const MessageListScreen({Key? key}) : super(key: key);
 
@@ -34,7 +35,6 @@ class MessageListScreen extends StatelessWidget {
                         color: Colors.black,
                       ),
                       children: [
-                        TextSpan(text: 'Recipient: '),
                         TextSpan(
                           text: message.recipient,
                           style: const TextStyle(
@@ -42,6 +42,7 @@ class MessageListScreen extends StatelessWidget {
                             color: Colors.blue,
                           ),
                         ),
+                        
                       ],
                     ),
                   ),
@@ -52,7 +53,30 @@ class MessageListScreen extends StatelessWidget {
                         color: Colors.black,
                       ),
                       children: [
-                        TextSpan(text: 'Amount: '),
+                      TextSpan(
+                          text: message.date,
+                          style: const TextStyle(
+                            fontWeight: FontWeight.bold,
+                            color: Colors.blue,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                  trailing: RichText(
+                    text: TextSpan(
+                      style: const TextStyle(
+                        fontSize: 14.0,
+                        color: Colors.black,
+                      ),
+                      children: [
+                        TextSpan(
+                          text: message.isCredit ? '-KSH. ' : '+KSH. ',
+                          style: TextStyle(
+                            color: Colors.green,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
                         TextSpan(
                           text: message.amount.toString(),
                           style: const TextStyle(
@@ -60,16 +84,13 @@ class MessageListScreen extends StatelessWidget {
                             color: Colors.green,
                           ),
                         ),
+                         TextSpan(
+                          text: '\n\t\t\t\t\t\t\t\t\t' + message.time,
+                          style: const TextStyle(
+                              fontWeight: FontWeight.bold, color: Colors.green),
+                        ),
+                        
                       ],
-                    ),
-                  ),
-                  trailing: Text(
-                    message.isCredit ? 'Sent' : 'Received',
-                    style: TextStyle(
-                      color: message.isCredit
-                          ? Color.fromARGB(255, 235, 4, 24)
-                          : Color.fromARGB(255, 44, 196, 13),
-                      fontWeight: FontWeight.bold,
                     ),
                   ),
                 );
