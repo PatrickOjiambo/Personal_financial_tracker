@@ -1,3 +1,6 @@
+import 'dart:convert';
+import 'dart:io';
+
 import 'package:hive/hive.dart';
 import 'package:path_provider/path_provider.dart';
 
@@ -138,6 +141,21 @@ class Message extends HiveObject {
     required int id,
     required this.time
   }) : id = DateTime.now().millisecondsSinceEpoch;
+
+
+  Map <String, dynamic> toJson() =>{
+
+    'address': this.address,
+    'recipient': this.recipient,
+    'amount': this.amount,
+    'isCredit': this.isCredit,
+    'date': this.date,
+    'time': this.time,
+  };
+
+
+
+
 }
 
 @HiveType(typeId: 1)

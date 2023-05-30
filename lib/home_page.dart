@@ -99,7 +99,7 @@ class HomePageState extends State<HomePage> {
       child: Column(
         //Shows the list of menu drawer
         children: [
-          menuItem(1, "Dashboard", Icons.dangerous_outlined,
+          menuItem(1, "Dashboard", Icons.dashboard,
               currentPage == DrawerSections.dashboard ? true : false),
           menuItem(2, "Transactions", Icons.monetization_on_outlined,
               currentPage == DrawerSections.transactions ? true : false),
@@ -113,7 +113,7 @@ class HomePageState extends State<HomePage> {
               currentPage == DrawerSections.stanchart ? true : false),
           menuItem(7, "Backup data", Icons.backup,
               currentPage == DrawerSections.backup_data ? true : false),
-          menuItem(8, "Budget Beep", Icons.alarm,
+          menuItem(8, "Budget Beep", Icons.account_balance_wallet,
               currentPage == DrawerSections.budget_beep ? true : false),
         ],
       ),

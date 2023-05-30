@@ -21,7 +21,7 @@ class _SignInScreenState extends State<SignInScreen> {
       body: Container(
         decoration: const BoxDecoration(
           gradient: LinearGradient(
-            colors: [Colors.pink, Colors.purple, Colors.lightBlue],
+            colors: [Color.fromARGB(255, 22, 40, 141), Colors.blue],
             begin: Alignment.topCenter,
             end: Alignment.bottomCenter,
           ),
@@ -52,13 +52,16 @@ class _SignInScreenState extends State<SignInScreen> {
                           email: _emailTextController.text,
                           password: _passwordTextController.text)
                       .then((value) {
+                  
                     Navigator.push(context,
                         MaterialPageRoute(builder: (context) => HomePage()));
                   }).onError((error, stackTrace) {
                     print("Error ${error.toString()}");
                   });
                 }),
-                signUpOption()
+                signUpOption(),
+                SizedBox(height: 10.0),
+                forgotpass()
               ],
             ),
           ),
@@ -80,6 +83,25 @@ class _SignInScreenState extends State<SignInScreen> {
           },
           child: const Text(
             "Sign up",
+            style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
+          ),
+        ),
+      ],
+    );
+  }
+
+  Row forgotpass() {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        const Text("Forgot Password?", style: TextStyle(color: Colors.white70)),
+        GestureDetector(
+          onTap: () {
+            Navigator.push(context,
+                MaterialPageRoute(builder: (context) => const SignUpScreen()));
+          },
+          child: const Text(
+            "Click here",
             style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
           ),
         ),

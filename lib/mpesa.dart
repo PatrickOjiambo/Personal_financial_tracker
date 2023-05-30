@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'backup/database.dart';
 
-
 class MpesaListScreen extends StatelessWidget {
   const MpesaListScreen({Key? key}) : super(key: key);
 
@@ -24,7 +23,7 @@ class MpesaListScreen extends StatelessWidget {
             final messages = snapshot.data!;
             return ListView.builder(
               itemCount: messages.length,
-              reverse: true,
+              reverse: false,
               itemBuilder: (context, index) {
                 final message = messages[index];
                 return ListTile(
@@ -38,11 +37,10 @@ class MpesaListScreen extends StatelessWidget {
                         TextSpan(
                           text: message.recipient,
                           style: const TextStyle(
-                            fontWeight: FontWeight.bold,
-                            color: Colors.blue,
+                            fontWeight: FontWeight.normal,
+                            color: Color.fromARGB(255, 26, 27, 27),
                           ),
                         ),
-                        
                       ],
                     ),
                   ),
@@ -53,11 +51,11 @@ class MpesaListScreen extends StatelessWidget {
                         color: Colors.black,
                       ),
                       children: [
-                      TextSpan(
+                        TextSpan(
                           text: message.date,
                           style: const TextStyle(
-                            fontWeight: FontWeight.bold,
-                            color: Colors.blue,
+                            fontWeight: FontWeight.normal,
+                            color: Color.fromARGB(255, 27, 27, 27),
                           ),
                         ),
                       ],
@@ -73,23 +71,23 @@ class MpesaListScreen extends StatelessWidget {
                         TextSpan(
                           text: message.isCredit ? '-KSH. ' : '+KSH. ',
                           style: TextStyle(
-                            color: Colors.green,
-                            fontWeight: FontWeight.bold,
+                            color: Color.fromARGB(255, 28, 29, 28),
+                            fontWeight: FontWeight.normal,
                           ),
                         ),
                         TextSpan(
                           text: message.amount.toString(),
                           style: const TextStyle(
-                            fontWeight: FontWeight.bold,
-                            color: Colors.green,
+                            fontWeight: FontWeight.normal,
+                            color: Color.fromARGB(255, 37, 37, 37),
                           ),
                         ),
-                         TextSpan(
+                        TextSpan(
                           text: '\n\t\t\t\t\t\t\t\t\t' + message.time,
                           style: const TextStyle(
-                              fontWeight: FontWeight.bold, color: Colors.green),
+                              fontWeight: FontWeight.normal,
+                              color: Color.fromARGB(255, 28, 29, 28)),
                         ),
-                        
                       ],
                     ),
                   ),

@@ -70,13 +70,13 @@ TextField reusableTextField1(String text, IconData icon, bool isPasswordType,
   enableSuggestions: !isPasswordType,
   autocorrect: !isPasswordType,
   cursorColor: Color.fromARGB(255, 24, 23, 23),
-  style: TextStyle(color: Color.fromARGB(255, 22, 21, 21).withOpacity(0.9)),
+  style: TextStyle(color: Color.fromARGB(255, 31, 142, 194).withOpacity(0.9)),
   decoration: InputDecoration(prefixIcon: Icon(icon, color:Color.fromARGB(179, 31, 28, 28),),
   labelText: text,
-  labelStyle: TextStyle(color: Color.fromARGB(255, 29, 28, 28).withOpacity(0.9)),
+  labelStyle: TextStyle(color: Color.fromARGB(255, 48, 174, 206).withOpacity(0.9)),
   filled: true,
   floatingLabelBehavior: FloatingLabelBehavior.never,
-  fillColor: Color.fromARGB(255, 14, 13, 13).withOpacity(0.3),
+  fillColor: Color.fromARGB(255, 32, 151, 180).withOpacity(0.3),
   border: OutlineInputBorder(
       borderRadius: BorderRadius.circular(30.0),
       borderSide: const BorderSide(width: 0, style: BorderStyle.none)),
@@ -101,9 +101,9 @@ Container reusableButton1(
   style: ButtonStyle(backgroundColor: MaterialStateProperty.resolveWith((states)
       {
       if (states.contains(MaterialState.pressed)) {
-      return Color.fromARGB(66, 65, 64, 64);
+      return Color.fromARGB(66, 20, 112, 173);
       }
-      return Color.fromARGB(255, 71, 63, 63);
+      return Color.fromARGB(255, 47, 139, 192);
       }),
       shape: MaterialStateProperty.all<RoundedRectangleBorder>(
         RoundedRectangleBorder(borderRadius: BorderRadius.circular(30)))),

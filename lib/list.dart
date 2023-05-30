@@ -24,7 +24,7 @@ class MessageListScreen extends StatelessWidget {
             final messages = snapshot.data!;
             return ListView.builder(
               itemCount: messages.length,
-              reverse: true,
+              reverse: false,
               itemBuilder: (context, index) {
                 final message = messages[index];
                 return ListTile(
@@ -32,14 +32,14 @@ class MessageListScreen extends StatelessWidget {
                     text: TextSpan(
                       style: const TextStyle(
                         fontSize: 16.0,
-                        color: Colors.black,
+                        color: Color.fromARGB(255, 26, 25, 25),
                       ),
                       children: [
                         TextSpan(
                           text: message.recipient,
                           style: const TextStyle(
-                            fontWeight: FontWeight.bold,
-                            color: Colors.blue,
+                            fontWeight: FontWeight.normal,
+                            color: Color.fromARGB(255, 23, 24, 24),
                           ),
                         ),
                         
@@ -50,14 +50,14 @@ class MessageListScreen extends StatelessWidget {
                     text: TextSpan(
                       style: const TextStyle(
                         fontSize: 14.0,
-                        color: Colors.black,
+                        color: Color.fromARGB(255, 24, 22, 22),
                       ),
                       children: [
                       TextSpan(
                           text: message.date,
                           style: const TextStyle(
-                            fontWeight: FontWeight.bold,
-                            color: Colors.blue,
+                            fontWeight: FontWeight.normal,
+                            color: Color.fromARGB(255, 28, 29, 29),
                           ),
                         ),
                       ],
@@ -67,27 +67,27 @@ class MessageListScreen extends StatelessWidget {
                     text: TextSpan(
                       style: const TextStyle(
                         fontSize: 14.0,
-                        color: Colors.black,
+                        color: Color.fromARGB(255, 31, 30, 30),
                       ),
                       children: [
                         TextSpan(
                           text: message.isCredit ? '-KSH. ' : '+KSH. ',
                           style: TextStyle(
-                            color: Colors.green,
-                            fontWeight: FontWeight.bold,
+                            color: Color.fromARGB(255, 34, 33, 33),
+                            fontWeight: FontWeight.normal,
                           ),
                         ),
                         TextSpan(
                           text: message.amount.toString(),
                           style: const TextStyle(
-                            fontWeight: FontWeight.bold,
-                            color: Colors.green,
+                            fontWeight: FontWeight.normal,
+                            color: Color.fromARGB(255, 37, 37, 37),
                           ),
                         ),
                          TextSpan(
                           text: '\n\t\t\t\t\t\t\t\t\t' + message.time,
                           style: const TextStyle(
-                              fontWeight: FontWeight.bold, color: Colors.green),
+                              fontWeight: FontWeight.normal, color: Color.fromARGB(255, 32, 32, 32)),
                         ),
                         
                       ],

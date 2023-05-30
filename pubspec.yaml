@@ -51,6 +51,7 @@ dependencies:
   flutter_native_timezone: ^2.0.0
   percent_indicator: ^4.2.3
   intl: ^0.18.1
+  file_picker: ^5.3.1
   
   
 

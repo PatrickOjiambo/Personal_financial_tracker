@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+
 class MyHeaderDrawer extends StatefulWidget {
   const MyHeaderDrawer({super.key});
 
@@ -10,7 +11,14 @@ class _MyHeaderDrawerState extends State<MyHeaderDrawer> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      color: Color.fromARGB(255, 84, 59, 124),
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.all(Radius.elliptical(5.0, 5.0)),
+        gradient: LinearGradient(
+          begin: Alignment.topLeft,
+          end: Alignment.bottomRight,
+          colors: [Colors.indigo, Colors.blue],
+        ),
+      ),
       width: double.infinity,
       height: 200,
       padding: const EdgeInsets.only(top: 20.0),
@@ -19,17 +27,17 @@ class _MyHeaderDrawerState extends State<MyHeaderDrawer> {
         children: [
           Container(
             margin: const EdgeInsets.only(bottom: 10),
-            height:70,
+            height: 70,
             decoration: const BoxDecoration(
                 shape: BoxShape.circle,
                 image: DecorationImage(
-                  image:AssetImage('images/profile.png'),
-
-                )
-            ),
+                  image: AssetImage('images/profile.png'),
+                )),
           ),
-          const Text("SpendSense", style: TextStyle(color: Colors.white, fontSize: 20),),
-          Text("Pages", style: TextStyle(color: Colors.grey[200], fontSize: 14),),
+          const Text(
+            "SpendSense",
+            style: TextStyle(color: Colors.white, fontSize: 20),
+          ),
         ],
       ),
     );

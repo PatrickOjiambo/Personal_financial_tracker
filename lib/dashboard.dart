@@ -38,7 +38,7 @@ class _DashboardPageState extends State<DashboardPage> {
             text: 'DashBoard',
             style: TextStyle(
                 fontWeight: FontWeight.bold,
-                color: Colors.white,
+                color: Color.fromARGB(255, 32, 123, 175),
                 fontStyle: FontStyle.italic,
                 fontFamily: 'Roboto'),
           ),
@@ -132,7 +132,7 @@ class _DashboardPageState extends State<DashboardPage> {
     //       colors: [Colors.indigo, Colors.blue],
     //     ),
     //   ),
-      
+
     // );
     // var inslider = ClipRRect(
     //     borderRadius: BorderRadius.all(Radius.circular(12.0)),
@@ -148,32 +148,40 @@ class _DashboardPageState extends State<DashboardPage> {
       crossAxisAlignment: CrossAxisAlignment.start,
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
+        SizedBox(height: 8.0),
         Text('Income',
             style: TextStyle(
               color: Colors.white,
               fontSize: 18,
               fontWeight: FontWeight.bold,
             )),
-        Icon(Icons.insert_chart_outlined_outlined,
-            color: Color.fromARGB(255, 47, 153, 33)),
+        SizedBox(height: 8.0),
+        Icon(Icons.bar_chart, color: Color.fromARGB(255, 47, 153, 33)),
+        SizedBox(height: 8.0),
       ],
     );
     var break2 = Row(
       crossAxisAlignment: CrossAxisAlignment.start,
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
-        Text('Spending',
-            style: TextStyle(
-              color: Colors.white,
-              fontSize: 18,
-              fontWeight: FontWeight.bold,
-            )),
-        Icon(Icons.insert_chart_outlined_outlined,
-            color: Color.fromARGB(255, 160, 16, 16)),
+        SizedBox(height: 8.0),
+        Text(
+          'Spending',
+          style: TextStyle(
+            color: Colors.white,
+            fontSize: 18,
+            fontWeight: FontWeight.bold,
+          ),
+        ),
+        SizedBox(
+          height: 16.0,
+        ),
+        Icon(Icons.bubble_chart_sharp, color: Color.fromARGB(255, 160, 16, 16)),
+        SizedBox(width: 8.0)
       ],
     );
     var income = Padding(
-      padding: EdgeInsets.all(16.0),
+      padding: EdgeInsets.all(22.0),
       child: Text(
         '   ${inco}',
         style: TextStyle(
@@ -184,7 +192,7 @@ class _DashboardPageState extends State<DashboardPage> {
       ),
     );
     var spending = Padding(
-      padding: EdgeInsets.all(16.0),
+      padding: EdgeInsets.fromLTRB(16.0, 22.0, 16.0, 16.0),
       child: Text(
         '  ${spend}',
         style: TextStyle(
@@ -207,6 +215,7 @@ class _DashboardPageState extends State<DashboardPage> {
             child: Column(
               children: [
                 break1,
+                SizedBox(height: 22.0),
                 income,
               ],
             ),
@@ -223,6 +232,7 @@ class _DashboardPageState extends State<DashboardPage> {
             child: Column(
               children: [
                 break2,
+                SizedBox(height: 22.0),
                 spending,
               ],
             ),

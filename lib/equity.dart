@@ -23,7 +23,7 @@ class EquityListScreen extends StatelessWidget {
             final messages = snapshot.data!;
             return ListView.builder(
               itemCount: messages.length,
-              reverse: true,
+              reverse: false,
               itemBuilder: (context, index) {
                 final message = messages[index];
                 return ListTile(
@@ -38,7 +38,7 @@ class EquityListScreen extends StatelessWidget {
                         TextSpan(
                           text: message.recipient,
                           style: const TextStyle(
-                            fontWeight: FontWeight.bold,
+                            fontWeight: FontWeight.normal,
                             color: Colors.blue,
                           ),
                         ),
@@ -56,7 +56,7 @@ class EquityListScreen extends StatelessWidget {
                         TextSpan(
                           text: message.amount.toString(),
                           style: const TextStyle(
-                            fontWeight: FontWeight.bold,
+                            fontWeight: FontWeight.normal,
                             color: Colors.green,
                           ),
                         ),
@@ -69,7 +69,7 @@ class EquityListScreen extends StatelessWidget {
                       color: message.isCredit
                           ? Color.fromARGB(255, 235, 4, 24)
                           : Color.fromARGB(255, 44, 196, 13),
-                      fontWeight: FontWeight.bold,
+                      fontWeight: FontWeight.normal,
                     ),
                   ),
                 );

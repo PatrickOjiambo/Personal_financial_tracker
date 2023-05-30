@@ -1,24 +1,84 @@
+/*
+import 'dart:convert';
 import 'dart:io';
-import 'package:path_provider/path_provider.dart';
-import 'package:path/path.dart' as path;
+import 'dart:js';
+import 'package:file_picker/file_picker.dart';
+import 'package:flutter/material.dart';
+import 'package:hive/hive.dart';
+import 'package:permission_handler/permission_handler.dart';
 
-Future<void> backupDatabase() async {
-  // Get the current database directory
-  final dbDirectory = await getApplicationDocumentsDirectory();
+import 'database.dart';
 
-  // Create a backup directory inside the app's documents directory
-  final backupDirectoryPath = path.join(dbDirectory.path, 'backup');
-  final backupDirectory = Directory(backupDirectoryPath);
-  if (!await backupDirectory.exists()) {
-    await backupDirectory.create();
-  }
+class Backup extends StatelessWidget {
+  const Backup({super.key});
 
-  // Copy the current database file to the backup directory with a timestamp suffix
-  final currentDbFile = File(path.join(dbDirectory.path, 'hive.box'));
-  final timestamp = DateTime.now().millisecondsSinceEpoch.toString();
-  final backupDbFileName = 'hive_$timestamp.box';
-  final backupDbFilePath = path.join(backupDirectoryPath, backupDbFileName);
-  await currentDbFile.copy(backupDbFilePath);
+  @override
+  Widget build(BuildContext context) {
 
-  print('%%%%%%%Database backup created at: $backupDbFilePath');
+ 
+Future<Directory> _getDirectory() async {
+    const String pathExt = 'Transacations/';//This is the name of the folder where the backup is stored
+    Directory newDirectory = Directory('/storage/emulated/0/' + pathExt);//Change this to any desired location where the folder will be created
+    if (await newDirectory.exists() == false) {
+      return newDirectory.create(recursive: true);
+    }
+    return newDirectory;
+  }    
+
+  // Copy the current database file to the back
+Future<void> createBackup() async {
+if (Hive.box<Database>('products').isEmpty) {
+  ScaffoldMessenger.of(context).showSnackBar(
+    const SnackBar(content: Text('No Products Stored.')),
+  );
+  return;
 }
+ScaffoldMessenger.of(context).showSnackBar(
+  const SnackBar(content: Text('Creating backup...')),
+);
+Map<String, dynamic> map = Hive.box<Database>('products')
+    .toMap()
+    .map((key, value) => MapEntry(key.toString(), value));
+String json = jsonEncode(map);
+await Permission.storage.request();
+Directory dir = await _getDirectory();
+String formattedDate = DateTime.now()
+    .toString()
+    .replaceAll('.', '-')
+    .replaceAll(' ', '-')
+    .replaceAll(':', '-');
+String path = '${dir.path}$formattedDate.json';//Change .json to your desired file format(like .barbackup or .hive).
+File backupFile = File(path);
+await backupFile.writeAsString(json);
+ScaffoldMessenger.of(context).showSnackBar(
+  const SnackBar(content: Text('Backup saved in folder Transactions')),
+);}
+
+
+   
+
+   Future<void> restoreBackup() async {
+ScaffoldMessenger.of(context).showSnackBar(
+  const SnackBar(content: Text('Restoring backup...')),
+);
+FilePickerResult? file = await FilePicker.platform.pickFiles(
+  type: FileType.any,
+);
+if (file != null) {
+  File files = File(file.files.single.path.toString());
+  Hive.box<Database>('products').clear();
+  Map<String, dynamic> map = jsonDecode(await files.readAsString());
+  for (var i = 0; i < map.length; i++) {
+    //Database product = Database.fromJson(i.toString(), map);
+    Hive.box<Database>('products').add(product);
+  }
+  ScaffoldMessenger.of(context).showSnackBar(
+    const SnackBar(content: Text('Restored Successfully...')),
+  );
+}
+}
+}
+}
+
+*/
+
